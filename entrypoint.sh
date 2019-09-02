@@ -5,9 +5,11 @@ set -u
 cd $GITHUB_WORKSPACE
 
 manifest=$(cat .comment-to-curl.json)
-command='ping'
+command=$(jq .body $GITHUB_EVENT_PATH)
+
+echo command 
 
 url=$(jq -n "$manifest" | jq -r .${command}.url)
 echo $url
 
-curl --silent "https://github.com"
+curl --silent "$url" > /dev/null 
