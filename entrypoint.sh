@@ -6,7 +6,7 @@ cd $GITHUB_WORKSPACE
 
 manifest=$(cat .comment-to-curl.json)
 command=$(cat $GITHUB_EVENT_PATH | jq .body)
-
+cat $GITHUB_EVENT_PATH
 echo $command 
 
 url=$(jq -n "$manifest" | jq -r .${command}.url)
