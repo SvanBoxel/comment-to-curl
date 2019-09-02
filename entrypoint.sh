@@ -6,6 +6,7 @@ cd $GITHUB_WORKSPACE
 
 action=$(cat $GITHUB_EVENT_PATH | jq .action)
 
+echo $action
 if [[ $action != "created" ]] 
 then
   exit 1
