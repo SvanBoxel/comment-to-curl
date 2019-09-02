@@ -2,8 +2,6 @@
 
 set -u
 
-cd $GITHUB_WORKSPACE
-
 action=$(cat $GITHUB_EVENT_PATH | jq -r .action)
 
 if [[ $action != "created" ]] 
@@ -14,11 +12,10 @@ fi
 echo "Action: ${action}"
 command=$(cat $GITHUB_EVENT_PATH | jq -r .comment.body)
 
-if [[ ${command:0:1} == "." ]] 
+if [[ ${command:0:1} != "." ]] 
 then
   exit 0
 fi
-
 
 echo "Command: ${command}"
 
