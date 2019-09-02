@@ -20,7 +20,7 @@ fi
 echo "Command: ${command}"
 
 manifest=$(cat .comment-to-curl.json)
-url=$(jq -n "$manifest" | jq -r .${command}.url)
+url=$(jq -n "$manifest" | jq -r "${command}.url")
 
 if [ -z "$url" ]
 then
