@@ -4,20 +4,19 @@ set -u
 
 cd $GITHUB_WORKSPACE
 
-action=$(cat $GITHUB_EVENT_PATH | jq .action)
+action=$(cat $GITHUB_EVENT_PATH | jq -r .action)
 
-echo $action
 if [[ $action != "created" ]] 
 then
-  exit 1
+  exit 0
 fi 
 
 echo "Action: ${action}"
-command=$(cat $GITHUB_EVENT_PATH | jq .comment.body)
+command=$(cat $GITHUB_EVENT_PATH | jq -r .comment.body)
 
 if [[ ${command:0:1} == "." ]] 
 then
-  exit 1
+  exit 0
 fi
 
 
@@ -28,7 +27,7 @@ url=$(jq -n "$manifest" | jq -r .${command}.url)
 
 if [ -z "$url" ]
 then
-  exit 1
+  exit 0
 fi
 
 echo "URL: ${url}"
