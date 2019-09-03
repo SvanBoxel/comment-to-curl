@@ -30,8 +30,7 @@ fi
 echo "URL: ${url}"
 
 issue_number=$(cat $GITHUB_EVENT_PATH | jq -r .issue.number)
-var_git="${GIT_REPOSITORY}"
-url=$(echo $url | sed -e "s/\${ISSUE_NUMBER}/${issue_number}/" -e "s~$var_git~$GIT_REPOSITORY~g)
+url=$(echo $url | sed -e "s/\${ISSUE_NUMBER}/${issue_number}/" -e "s~\$GIT_REPOSITORY~$GIT_REPOSITORY~g)
 
 echo $url
 
